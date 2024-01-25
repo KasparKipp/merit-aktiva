@@ -1,0 +1,1 @@
+export { merit } from "./merit";

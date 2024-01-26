@@ -21,14 +21,14 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
+        cache: "pnpm"
 
     - name: setup pnpm
       uses: pnpm/action-setup@v2
       with:
         version: 8
         run_install: |
-          - recursive: true
-            args: [--frozen-lockfile]
+          - args: [--frozen-lockfile]
 
     - name: Run CI script
       run: |

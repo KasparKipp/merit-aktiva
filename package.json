@@ -24,6 +24,9 @@
   ],
   "author": "Kaspar Kipp",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
     "@types/node": "^20.11.5",

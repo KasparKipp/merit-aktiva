@@ -1,3 +1,4 @@
+import {createHmac} from "node:crypto"
 /**
  * Formats the current date and time into a string representation using the "yyyyMMddHHmmss" format.
  * Designed for use with the Merit Aktiva API to ensure proper representation of date and time in requests.
@@ -18,7 +19,7 @@
  * - Check the API documentation for any specific requirements or considerations
  *   regarding date and time representation in API requests.
  */
-function formatCurrentDate(dateToFormat: Date) {
+const formatCurrentDate = (dateToFormat: Date) => {
   const year = dateToFormat.getFullYear();
   const month = (dateToFormat.getMonth() + 1).toString().padStart(2, "0");
   const day = dateToFormat.getDate().toString().padStart(2, "0");
@@ -29,24 +30,21 @@ function formatCurrentDate(dateToFormat: Date) {
   const formattedDate = `${year}${month}${day}${hours}${minutes}${seconds}`;
 
   return formattedDate;
-}
+};
 
 function getSignPayload(apiId: string, apiKey: string) {
   async function signPayload(payload: Object, currentDate: Date) {
     const timestamp = formatCurrentDate(currentDate);
     const dataString = apiId + timestamp + JSON.stringify(payload);
-    const { createHmac } = await import("node:crypto");
 
-    const hmac = createHmac("sha256", apiKey);
+    const hash = createHmac("sha256", apiKey)
+      .update(dataString)
+      .digest("base64");
 
-    hmac.update(dataString);
-
-    const signature = btoa(hmac.digest("hex"))
-    console.log(signature);
+    const signature = btoa(hash);
+    return signature;
   }
-  return;
+  return signPayload;
 }
 
-function getMerit(apiId: string, apiKey: string) {
-  return {};
-}
+export { getSignPayload };

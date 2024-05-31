@@ -1,5 +1,11 @@
 # merit-aktiva
 
+## 0.1.0
+
+### Minor Changes
+
+- a74c68f: Initial endpoints and package structure
+
 ## 0.0.1
 
 ### Patch Changes

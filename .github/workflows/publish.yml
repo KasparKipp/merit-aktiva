@@ -24,7 +24,7 @@ jobs:
         with:
           version: 8
           run_install: |
-            - args: [--frozen-lockfile]
+            - args: [--no-frozen-lockfile]
 
       - name: Use Node.js version
         uses: actions/setup-node@v4

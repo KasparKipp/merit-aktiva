@@ -9,11 +9,13 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      TEST_MERIT_API_ID: ${{ secrets.TEST_MERIT_API_ID }}
+      TEST_MERIT_API_KEY: ${{ secrets.TEST_MERIT_API_KEY }}
 
     strategy:
       matrix:
         node-version: [20]
-
 
     steps:
       - name: Checkout repository

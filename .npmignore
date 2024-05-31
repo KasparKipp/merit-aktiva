@@ -1,5 +1,6 @@
-src
-.changeset
-.github
-pnpm-lock.yaml
-tsconfig.json
+*
+!package.json
+!dist/**/*
+!CHANGELOG.md
+!README.md
+!LICENCE

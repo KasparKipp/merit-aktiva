@@ -1,5 +1,11 @@
 # merit-aktiva
 
+## 0.1.1
+
+### Patch Changes
+
+- 34e35af: Introduced Item List endpoint
+
 ## 0.1.0
 
 ### Minor Changes

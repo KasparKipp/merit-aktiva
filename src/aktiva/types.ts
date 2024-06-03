@@ -1,13 +1,15 @@
-import { UUID } from "crypto";
-
 import {
   AccountingDocTypes,
   EInvOperatorTypes,
   OfferDocTypeTypes,
   PolandDocumentTypes,
   PolandProcCodes,
+  ItemObjectTypes,
+  ItemUsageTypes,
 } from "@/aktiva/consts";
 import { dateToTimestamp } from "@/aktiva/utils";
+
+export type UUID = `${string}-${string}-4${string}-${string}-${string}`;
 
 export type BaseUrl = `https://${string}/api/v${"1" | "2"}/`;
 export type EndpointUrl = `${BaseUrl}${string}`;
@@ -16,7 +18,7 @@ export type Localization = "EE" | "PL";
 export type MeritConfig = {
   apiId: UUID;
   apiKey: `${string}=`;
-  localization?: "EE" | "PL";
+  localization?: Localization;
 };
 export type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<
   T,
@@ -60,7 +62,13 @@ export type ServerErrorResponse = {
 export type Timestamp = ReturnType<typeof dateToTimestamp>;
 export type ProcCodeType = (typeof PolandProcCodes)[number];
 
-export type PolandDocumentTypeType =
+export type PolandDocumentType =
   (typeof PolandDocumentTypes)[keyof typeof PolandDocumentTypes];
+
+export type ItemObjectType =
+  (typeof ItemObjectTypes)[keyof typeof ItemObjectTypes];
+
+export type ItemUsageType =
+  (typeof ItemUsageTypes)[keyof typeof ItemUsageTypes];
 
 export type NonEmptyArray<T> = [T, ...T[]];

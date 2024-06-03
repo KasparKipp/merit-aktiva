@@ -66,3 +66,10 @@ export const ItemObjectTypes = {
   service: 2,
   item: 3,
 } as const;
+
+export const ItemUsageTypes = {
+  invoices: 1,
+  bills: 2,
+  invoices_bills: 3,
+  inavtive_: 4,
+} as const;

@@ -1,5 +1,3 @@
-import type { UUID } from "crypto";
-
 import { ItemObjectTypes, URL_V2 } from "@/aktiva/consts";
 import { generateRequestUrl, handleApiResponse } from "@/aktiva/utils";
 
@@ -12,10 +10,10 @@ import type {
   MeritConfig,
   EInvOperatorType,
   AccountingDocType,
-  ProcCodeType,
-  PolandDocumentTypeType,
   Timestamp,
   Dimension,
+  ItemObjectType,
+  UUID,
 } from "@/aktiva/types";
 
 const path = "sendinvoice";
@@ -32,7 +30,7 @@ type NewCustomerType = {
   City?: string; // Str 30
   Country?: string; // Str 100
   PostalCode?: string; // Str 15
-  CountryCode?: "ET" | "EN" | "RU" | "FI" | "PL" | "SV"; // TODO add country codes
+  CountryCode: "EE" | "EN" | "RU" | "FI" | "PL" | "SV"; // TODO add country codes
   PhoneNo?: string; // Str 50
   PhoneNo2?: string; // Str 50
   HomePage?: string; // Str 80
@@ -64,10 +62,10 @@ type NewPayer = Omit<
 
 type Payer = ExistingPayer | NewPayer;
 
-type ExistingCustomerByNameAndCountryCodeType = {
-  Name: string;
-  CountryCode: "EE" | "EN" | "RU" | "FI" | "PL" | "SV";
-};
+type ExistingCustomerByNameAndCountryCodeType = Pick<
+  NewCustomerType,
+  "Name" | "CountryCode"
+>;
 
 type ExistingCustomerByIdType = {
   Id: UUID;
@@ -129,7 +127,6 @@ type InvoiceRowObjectType = {
   VatDate?: string; // YYYYMMDD type date. In some countries where you have to specify VatDate.
 };
 
-type ItemObjectType = (typeof ItemObjectTypes)[keyof typeof ItemObjectTypes];
 export type ExistingItemObject = {
   Code: string;
 };
@@ -157,7 +154,7 @@ type CreateSalesInvoiceResponse = {
   InvoiceId: UUID;
   InvoiceNo: string;
   RefNo: string;
-  NewCustomer: NewCustomerType | null;
+  NewCustomer: string | null; // Returns the name of the new customer or null
 };
 function getCreateSalesInvoice(
   args: GetCreateSalesInvoice,

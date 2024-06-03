@@ -99,7 +99,7 @@ This is the list of endpoints not yet included in the package:
 21. Banks List
 22. Financial Years
 23. Items
-    - Item List
+    - ~~Item List~~
     - Item Groups
     - Add Items
     - Add Item groups

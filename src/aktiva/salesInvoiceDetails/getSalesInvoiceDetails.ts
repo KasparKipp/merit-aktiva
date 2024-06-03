@@ -1,5 +1,3 @@
-import type { UUID } from "crypto";
-
 import { URL_V2 } from "@/aktiva/consts";
 import { generateRequestUrl, handleApiResponse } from "@/aktiva/utils";
 
@@ -17,6 +15,7 @@ import type {
   Dimension,
   AccountingDocType,
   OfferDocTypeType,
+  UUID,
 } from "@/aktiva/types";
 
 const path = "getinvoice";
@@ -122,7 +121,8 @@ function getSalesInvoiceDetails(
   args: GetSalesInvoicesArgs,
   signPayload?: SignPayload
 ) {
-  const signPayloadFn: SignPayload = signPayload ?? getSignPayload(args);const { apiId, localization } = args;
+  const signPayloadFn: SignPayload = signPayload ?? getSignPayload(args);
+  const { apiId, localization } = args;
   async function salesInvoices(args: InvoiceFields) {
     const url: EndpointUrl = `${URL_V2[localization]}${path}`;
     const body = JSON.stringify(args);

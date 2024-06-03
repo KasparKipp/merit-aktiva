@@ -72,6 +72,7 @@ describe("createSalesInvoice", () => {
 
   it("Should throw when Customer.CountryCode missing", async () => {
     const payload: CreateSalesInvoiceParams = {
+      // @ts-expect-error
       Customer: {
         Name: "Customer 1",
       },

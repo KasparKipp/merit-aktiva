@@ -1,5 +1,3 @@
-import { type UUID } from "crypto";
-
 import { URL_V1 } from "@/aktiva/consts";
 import { generateRequestUrl, handleApiResponse } from "@/aktiva/utils";
 
@@ -7,29 +5,22 @@ import getSignPayload, {
   dateToTimestamp,
   type SignPayload,
 } from "@/aktiva/authentication/getSignPayload";
-import type { EndpointUrl, MeritConfig, NonEmptyArray } from "@/aktiva/types";
+import type { EndpointUrl, MeritConfig } from "@/aktiva/types";
+import type { ItemsParams, ItemsResponse } from "./types";
 
-const path = "gettaxes";
+const path = "getitems";
 
-type GetTaxes = Required<MeritConfig>;
+type GetItemsEndpointConfig = Required<MeritConfig>;
 
-type Tax = {
-  Id: UUID;
-  Code: string;
-  Name: string;
-  NameEN: string;
-  NameRU: string;
-  TaxPct: number;
-  NonActive: boolean;
-};
-type TaxResponse = NonEmptyArray<Tax>;
-
-function getTaxes(args: GetTaxes, signPayload?: SignPayload) {
+function getItemsEndpoint(
+  args: GetItemsEndpointConfig,
+  signPayload?: SignPayload
+) {
   const signPayloadFn: SignPayload = signPayload ?? getSignPayload(args);
   const { apiId, localization } = args;
-  async function taxes() {
+  async function items(params: ItemsParams = {}) {
     const url: EndpointUrl = `${URL_V1[localization]}${path}`;
-    const body = JSON.stringify({});
+    const body = JSON.stringify(params);
     const timestamp = dateToTimestamp(new Date());
     const signature = await signPayloadFn(body, timestamp);
     const urlWithParams = generateRequestUrl(url, apiId, timestamp, signature);
@@ -44,9 +35,9 @@ function getTaxes(args: GetTaxes, signPayload?: SignPayload) {
 
     const response = await fetch(urlWithParams, config);
 
-    return handleApiResponse<TaxResponse>(response);
+    return handleApiResponse<ItemsResponse>(response);
   }
-  return taxes;
+  return items;
 }
 
-export default getTaxes;
+export default getItemsEndpoint;

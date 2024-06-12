@@ -1,5 +1,11 @@
 # merit-aktiva
 
+## 0.1.2
+
+### Patch Changes
+
+- fff5bc3: Added customers and create customer endpoint
+
 ## 0.1.1
 
 ### Patch Changes

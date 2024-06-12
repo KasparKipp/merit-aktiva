@@ -74,7 +74,6 @@ describe("getSalesInvoiceDetails", () => {
     const invalidApiId = `${apiId.slice(0, 14)}1${apiId.slice(15)}` as UUID;
 
     const invalidConfig: Required<MeritConfig> = {
-      // @ts-expect-error
       apiId: invalidApiId,
       ...restOfValidConfig,
     };

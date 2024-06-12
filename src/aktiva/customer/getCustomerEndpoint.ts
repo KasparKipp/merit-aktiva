@@ -105,8 +105,6 @@ function getCustomerEndpoints(args: GetSalesInvoicesArgs, signPayload?: SignPayl
       headers,
       body,
     };
-    console.log("UrlWithparams", urlWithParams)
-    console.log("Body", body)
     const response = await fetch(urlWithParams, config);
 
     return await handleApiResponse<NewCustomerResponse>(response);

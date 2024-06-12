@@ -1,19 +1,20 @@
-import { ItemObjectTypes, URL_V2 } from "@/aktiva/consts";
+import { URL_V2 } from "@/aktiva/consts";
 import { generateRequestUrl, handleApiResponse } from "@/aktiva/utils";
 
 import getSignPayload, {
   dateToTimestamp,
   type SignPayload,
 } from "@/aktiva/authentication/getSignPayload";
+import type { Dimension } from "@/aktiva/dimensions/types";
 import type {
   EndpointUrl,
   MeritConfig,
   EInvOperatorType,
   AccountingDocType,
   Timestamp,
-  Dimension,
   ItemObjectType,
   UUID,
+  SalesInvoiceLanguageType,
 } from "@/aktiva/types";
 
 const path = "sendinvoice";
@@ -34,7 +35,7 @@ type NewCustomerType = {
   PhoneNo?: string; // Str 50
   PhoneNo2?: string; // Str 50
   HomePage?: string; // Str 80
-  SalesInvLang?: "ET" | "EN" | "RU" | "FI" | "PL" | "SV"; // Invoice language for this specific customer
+  SalesInvLang?: SalesInvoiceLanguageType; // Invoice language for this specific customer
   RefNoBase?: string; //Str 36
   EInvPaymId?: string; // Str 20
   EInvOperator?: EInvOperatorType;

@@ -73,3 +73,12 @@ export const ItemUsageTypes = {
   invoices_bills: 3,
   inavtive_: 4,
 } as const;
+
+export const SalesInvoiceLanguageTypes = {
+  et: "ET",
+  en: "EN",
+  ru: "RU",
+  fi: "FI",
+  pl: "PL",
+  sv: "SV",
+} as const

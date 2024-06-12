@@ -5,6 +5,8 @@ import getSignPayload, {
   dateToTimestamp,
   type SignPayload,
 } from "@/aktiva/authentication/getSignPayload";
+
+import type { Dimensions } from "@/aktiva/dimensions/types";
 import type {
   EndpointUrl,
   CurrencyCodeType,
@@ -12,7 +14,6 @@ import type {
   MeritConfig,
   UserNameType,
   EInvOperatorType,
-  Dimension,
   AccountingDocType,
   OfferDocTypeType,
   UUID,
@@ -26,7 +27,7 @@ export type InvoiceFields = {
 };
 
 type Header = {
-  Dimensions: Dimension[];
+  Dimensions: Dimensions;
   SIHId: UUID;
   DepartmentCode: string | null;
   DepartmentName: string | null;

@@ -1,5 +1,3 @@
-import type { UUID } from "crypto";
-
 import { URL_V2 } from "@/aktiva/consts";
 import {
   formatDate,
@@ -17,6 +15,7 @@ import type {
   EndpointUrl,
   MeritConfig,
   RequireAtLeastOne,
+  UUID,
   UserNameType,
 } from "@/aktiva/types";
 
@@ -106,7 +105,8 @@ function getSalesInvoices(
   args: GetSalesInvoicesArgs,
   signPayload?: SignPayload
 ) {
-  const signPayloadFn: SignPayload = signPayload ?? getSignPayload(args);const { apiId, localization } = args;
+  const signPayloadFn: SignPayload = signPayload ?? getSignPayload(args);
+  const { apiId, localization } = args;
   async function salesInvoices(args: SalesInvoicesParams) {
     const baseUrl = URL_V2[localization];
     let url: EndpointUrl;

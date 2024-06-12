@@ -6,10 +6,11 @@ import {
   PolandProcCodes,
   ItemObjectTypes,
   ItemUsageTypes,
+  SalesInvoiceLanguageTypes,
 } from "@/aktiva/consts";
 import { dateToTimestamp } from "@/aktiva/utils";
 
-export type UUID = `${string}-${string}-4${string}-${string}-${string}`;
+export type UUID = `${string}-${string}-${string}-${string}-${string}`;
 
 export type BaseUrl = `https://${string}/api/v${"1" | "2"}/`;
 export type EndpointUrl = `${BaseUrl}${string}`;
@@ -46,12 +47,6 @@ export type AccountingDocType =
 export type OfferDocTypeType =
   | (typeof OfferDocTypeTypes)[keyof typeof OfferDocTypeTypes];
 
-export type Dimension = {
-  DimID: string;
-  DimValueId: UUID;
-  DimCode: string;
-};
-
 export type MeritErrorCode = "FormatException" | string;
 export type ServerErrorResponse = {
   Id?: UUID;
@@ -70,5 +65,8 @@ export type ItemObjectType =
 
 export type ItemUsageType =
   (typeof ItemUsageTypes)[keyof typeof ItemUsageTypes];
+
+export type SalesInvoiceLanguageType =
+  (typeof SalesInvoiceLanguageTypes)[keyof typeof SalesInvoiceLanguageTypes];
 
 export type NonEmptyArray<T> = [T, ...T[]];

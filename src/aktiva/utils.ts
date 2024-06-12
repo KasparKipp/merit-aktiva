@@ -49,7 +49,7 @@ function generateRequestUrl(
   return `${url}?ApiId=${apiId}&timestamp=${timestamp}&signature=${signature}` as const;
 }
 
-async function handleApiResponse<T>(response: Response): Promise<T | null> {
+async function handleApiResponse<T>(response: Response): Promise<T> {
   if (response.ok) {
     return response.json();
   }

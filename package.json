@@ -1,6 +1,6 @@
 {
   "name": "merit-aktiva",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Merit Aktiva accounting software API wrapper",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

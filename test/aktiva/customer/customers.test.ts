@@ -11,8 +11,7 @@ const itemsTestConfig = {
   localization: "EE",
 } as const;
 
-const signPayload = getSignPayload(itemsTestConfig);
-const customer = getCustomerEndpoint(itemsTestConfig, signPayload);
+const customer = getCustomerEndpoint(itemsTestConfig);
 
 describe("Customers endpoint", () => {
   it("Should return some customers", async () => {

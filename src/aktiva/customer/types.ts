@@ -1,4 +1,9 @@
-import type { EInvOperatorType, NonEmptyArray, SalesInvoiceLanguageType, UUID } from "@/aktiva/types";
+import type {
+  EInvOperatorType,
+  NonEmptyArray,
+  SalesInvoiceLanguageType,
+  UUID,
+} from "@/aktiva/types";
 import { Dimensions } from "@/aktiva/dimensions/types";
 export type CustomersFields = {
   Id?: UUID;
@@ -10,6 +15,11 @@ export type CustomersFields = {
   ChangedDate?: string; // YYYYmmdd
 };
 
+export type CreateCustomerFields = CreateCustomerParams;
+
+export type UpdateCustomerFields = Omit<UpdateCustomerParams, "Comments"> & {
+  Comments?: Comment[];
+};
 export type OptionalParams = Pick<CustomersFields, "WithComments"> & {
   CommentsFrom?: Date;
   ChangedDate?: Date;
@@ -47,7 +57,8 @@ export type CustomersResponse = {
   PostalCode: string | null;
   CountryCode: "EE" | "EN" | "RU" | "FI" | "PL" | "SV"; // TODO: add more
   CountryName: string;
-  FaxNo: string | null;
+  // FaxNo seems deprecated in API
+  FaxNo: null;
   Email: string | null;
   HomePage: string | null;
   PaymentDeadLine: number;
@@ -110,3 +121,41 @@ export type NewCustomerResponse = {
   Id: UUID;
   Name: string;
 };
+
+type RequiredUpdateParams = Required<Pick<CreateCustomerParams, "Id">>;
+
+type OptionalUpdateParams = Partial<
+  Pick<
+    CreateCustomerParams,
+    | "Name"
+    | "CountryCode"
+    | "Address"
+    | "City"
+    | "PostalCode"
+    | "PhoneNo"
+    | "PhoneNo2"
+    | "Email"
+    | "RegNo"
+    | "VatRegNo"
+    | "SalesInvLang"
+    | "RefNoBase"
+    | "EInvPaymId"
+    | "EInvOperator"
+    | "BankAccount"
+    | "CustGrCode"
+    | "CustGrId"
+    | "Contact"
+    | "ApixEInv"
+    | "PaymentDeadLine"
+    | "OverDueCharge"
+    | "NotTDCustomer"
+  > & {
+    GroupInv?: boolean;
+    Comments?: RawComment[];
+    PayerReceiverName?: string;
+  }
+>;
+
+export type UpdateCustomerParams = RequiredUpdateParams & OptionalUpdateParams;
+
+export type UpdateCustomerResponse = "updated";

@@ -8,11 +8,13 @@ const itemsTestConfig = {
   localization: "EE",
 } as const;
 
-const {customers, createCustomer} = getCustomerEndpoint(itemsTestConfig);
+const { customers, createCustomer, updateCustomer } =
+  getCustomerEndpoint(itemsTestConfig);
 
 describe("getCustomerEndpoint", () => {
   it("Should return endpoint function(-s", async () => {
     expect(typeof customers).toBe("function");
     expect(typeof createCustomer).toBe("function");
+    expect(typeof updateCustomer).toBe("function");
   });
 });

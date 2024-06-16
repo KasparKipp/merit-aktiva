@@ -1,5 +1,11 @@
 # merit-aktiva
 
+## 0.1.3
+
+### Patch Changes
+
+- 620af60: Add updatecustomer endpoint
+
 ## 0.1.2
 
 ### Patch Changes

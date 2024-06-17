@@ -68,9 +68,9 @@ This is the list of endpoints not yet included in the package:
 10. ~~Tax list~~
 11. Send Tax
 12. Customers
-    - Get Customer List
-    - Create Customer
-    - Update Customer
+    - ~~Get Customer List~~
+    - ~~Create Customer~~
+    - ~~Update Customer~~
     - Create Customergroup
     - Get Customergroups
 13. Vendors

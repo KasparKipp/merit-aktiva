@@ -5,6 +5,7 @@ import getSalesInvoiceDetails from "@/aktiva/salesInvoiceDetails/getSalesInvoice
 import getCreateSalesInvoice from "@/aktiva/createSalesInvoice/getCreateSalesInvoice";
 import getDeleteSalesInvoice from "@/aktiva/deleteSalesInvoice/getDeleteSalesInvoice";
 import getTaxes from "@/aktiva/taxes/getTaxes";
+import getCustomerEndpoints from "./customer/getCustomerEndpoint";
 
 export default function aktiva(opts: MeritConfig) {
   const { localization = "EE", ...rest } = opts;
@@ -26,6 +27,8 @@ export default function aktiva(opts: MeritConfig) {
   );
   const taxes = getTaxes(resolvedDefaults, signPayload);
 
+  const customer = getCustomerEndpoints(resolvedDefaults, signPayload);
+
   return {
     signPayload,
     salesInvoices,
@@ -33,5 +36,6 @@ export default function aktiva(opts: MeritConfig) {
     createSalesInvoice,
     deleteSalesInvoice,
     taxes,
+    customer,
   };
 }

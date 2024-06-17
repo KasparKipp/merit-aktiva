@@ -65,6 +65,11 @@ async function handleApiResponse<T>(response: Response): Promise<T> {
           "Unauthorized: Your request is missing url params or the apiId is invalid"
         );
       }
+      if (responseText === "api-invalidSignature")  {
+        throw Error(
+          "Unauthorized: The apiId is invalid"
+        );
+      }
       if (responseText === "api-wronglicense") {
         throw Error(
           "Unauthorized: This company’s creator did not have PRO or PREMIUM license"

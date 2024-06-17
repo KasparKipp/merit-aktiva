@@ -87,7 +87,7 @@ describe("getSalesInvoiceDetails", () => {
     await expect(
       async () => await salesInvoiceDetails(existingInvoiceParams)
     ).rejects.toThrowError(
-      "Unauthorized: Your request is missing url params or the apiId is invalid"
+      "Unauthorized: The apiId is invalid"
     );
   });
 

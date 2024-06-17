@@ -1,5 +1,11 @@
 # merit-aktiva
 
+## 0.1.5
+
+### Patch Changes
+
+- 9c2e5d6: Fix broken tests due to api response changes
+
 ## 0.1.4
 
 ### Patch Changes

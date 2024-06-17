@@ -1,5 +1,11 @@
 # merit-aktiva
 
+## 0.1.4
+
+### Patch Changes
+
+- e0b48ed: export customer endpoint
+
 ## 0.1.3
 
 ### Patch Changes

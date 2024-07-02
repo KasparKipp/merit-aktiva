@@ -1,5 +1,11 @@
 # merit-aktiva
 
+## 0.1.6
+
+### Patch Changes
+
+- c93db10: Structure Library api to mirror docs
+
 ## 0.1.5
 
 ### Patch Changes

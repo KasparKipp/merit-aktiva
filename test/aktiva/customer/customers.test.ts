@@ -1,7 +1,6 @@
 import { describe, it, expect } from "vitest";
-import getSignPayload from "@/aktiva/authentication/getSignPayload";
 import { MeritConfig } from "@/types";
-import getCustomerEndpoint from "@/aktiva/customer/getCustomerEndpoint";
+import getCustomerEndpoint from "@/aktiva/customer/getCustomerEndpoints";
 import { isUuid } from "@/aktiva/testutils";
 import { AllCustomersParams, CustomersResponse } from "@/aktiva/customer/types";
 

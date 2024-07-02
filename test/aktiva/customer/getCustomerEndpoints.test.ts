@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { MeritConfig } from "@/types";
-import getCustomerEndpoint from "@/aktiva/customer/getCustomerEndpoint";
+import getCustomerEndpoint from "@/aktiva/customer/getCustomerEndpoints";
 
 const itemsTestConfig = {
   apiId: process.env.TEST_MERIT_API_ID as MeritConfig["apiId"],

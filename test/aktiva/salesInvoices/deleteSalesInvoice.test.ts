@@ -1,13 +1,11 @@
 import { describe, it, expect } from "vitest";
-import getDeleteSalesInvoice, {
-  DeleteInvoiceParams,
-} from "@/aktiva/deleteSalesInvoice/getDeleteSalesInvoice";
-import getCreateSalesInvoice, {
-  CreateSalesInvoiceParams,
+import merit, {
+  type MeritConfig,
+  type CreateSalesInvoiceParams,
+  ItemObjectTypes,
   MinimalItemObject,
-} from "@/aktiva/createSalesInvoice/getCreateSalesInvoice";
-import { ItemObjectTypes } from "@/aktiva/consts";
-import { MeritConfig } from "@/types";
+  type DeleteInvoiceParams,
+} from "@/index";
 
 const deleteSalesInvoiceTestConfig = {
   apiId: process.env.TEST_MERIT_API_ID as MeritConfig["apiId"],
@@ -15,8 +13,8 @@ const deleteSalesInvoiceTestConfig = {
   localization: "EE",
 } as const;
 
-const deleteSalesInvoice = getDeleteSalesInvoice(deleteSalesInvoiceTestConfig);
-const createSalesInvoice = getCreateSalesInvoice(deleteSalesInvoiceTestConfig);
+const aktiva = merit(deleteSalesInvoiceTestConfig);
+const { deleteSalesInvoice, createSalesInvoice } = aktiva.salesInvoices;
 
 describe("getDeleteSalesInvoice", () => {
   it("Should return deleteSalesInvoice function", async () => {

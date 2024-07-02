@@ -1,15 +1,13 @@
 import { describe, it, expect } from "vitest";
-import getSignPayload from "@/aktiva/authentication/getSignPayload";
-import getSalesInvoiceDetails, {
-  InvoiceFields,
-} from "@/aktiva/salesInvoiceDetails/getSalesInvoiceDetails";
-import { UUID } from "crypto";
-import getCreateSalesInvoice, {
+import merit, {
+  type MeritConfig,
   CreateSalesInvoiceParams,
+  UUID,
+  ItemObjectTypes,
   MinimalItemObject,
-} from "@/aktiva/createSalesInvoice/getCreateSalesInvoice";
-import { ItemObjectTypes } from "@/aktiva/consts";
-import { MeritConfig } from "@/types";
+  InvoiceFields,
+  getSalesInvoicesEndpoints,
+} from "@/index";
 
 const salesInvoiceDetailsTestConfig = {
   apiId: process.env.TEST_MERIT_API_ID as MeritConfig["apiId"],
@@ -17,16 +15,8 @@ const salesInvoiceDetailsTestConfig = {
   localization: "EE",
 } as const;
 
-const signPayload = getSignPayload(salesInvoiceDetailsTestConfig);
-const salesInvoiceDetails = getSalesInvoiceDetails(
-  salesInvoiceDetailsTestConfig,
-  signPayload
-);
-
-const createSalesInvoice = getCreateSalesInvoice(
-  salesInvoiceDetailsTestConfig,
-  signPayload
-);
+const aktiva = merit(salesInvoiceDetailsTestConfig);
+const { salesInvoiceDetails, createSalesInvoice } = aktiva.salesInvoices;
 
 describe("getSalesInvoiceDetails", () => {
   it("Should return salesInvoiceDetails function", async () => {
@@ -78,17 +68,11 @@ describe("getSalesInvoiceDetails", () => {
       ...restOfValidConfig,
     };
 
-    const signPayload = getSignPayload(invalidConfig);
+    const { salesInvoiceDetails } = getSalesInvoicesEndpoints(invalidConfig);
 
-    const salesInvoiceDetails = getSalesInvoiceDetails(
-      invalidConfig,
-      signPayload
-    );
     await expect(
       async () => await salesInvoiceDetails(existingInvoiceParams)
-    ).rejects.toThrowError(
-      "Unauthorized: The apiId is invalid"
-    );
+    ).rejects.toThrowError("Unauthorized: The apiId is invalid");
   });
 
   // THIS TEST SHOULD NOT PASS, apiKey is not validated with this request
@@ -99,17 +83,13 @@ describe("getSalesInvoiceDetails", () => {
     const { apiKey, ...restOfValidConfig } = salesInvoiceDetailsTestConfig;
     const invalidApiKey = "invalid=";
 
-    const invalidConfig: MeritConfig = {
-      apiKey: invalidApiKey,
+    const invalidConfig = {
+      apiKey: invalidApiKey as MeritConfig["apiKey"],
       ...restOfValidConfig,
     };
-    const signPayload = getSignPayload(invalidConfig);
+    
+    const { salesInvoiceDetails } = getSalesInvoicesEndpoints(invalidConfig);
 
-    const salesInvoiceDetails = getSalesInvoiceDetails(
-      // @ts-expect-error
-      invalidConfig,
-      signPayload
-    );
     await expect(
       async () => await salesInvoiceDetails(existingInvoiceParams)
     ).rejects.toThrowError(

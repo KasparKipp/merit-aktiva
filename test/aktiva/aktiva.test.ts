@@ -14,14 +14,17 @@ describe("aktiva", () => {
   it("Should return endpoint functions", () => {
     console.log("CONFIG", config)
     expect(typeof aktiva.signPayload).toBe("function");
+    
+    expect(typeof aktiva.customer.createCustomer).toBe("function");
+    expect(typeof aktiva.customer.customers).toBe("function");
+    expect(typeof aktiva.customer.updateCustomer).toBe("function");
+    
+    expect(typeof aktiva.items).toBe("function");
 
-    expect(typeof aktiva.createSalesInvoice).toBe("function");
-
-    expect(typeof aktiva.deleteSalesInvoice).toBe("function");
-
-    expect(typeof aktiva.salesInvoicesDetails).toBe("function");
-
-    expect(typeof aktiva.salesInvoices).toBe("function");
+    expect(typeof aktiva.salesInvoices.createSalesInvoice).toBe("function");
+    expect(typeof aktiva.salesInvoices.deleteSalesInvoice).toBe("function");
+    expect(typeof aktiva.salesInvoices.salesInvoiceDetails).toBe("function");
+    expect(typeof aktiva.salesInvoices.salesInvoicesList).toBe("function");
 
     expect(typeof aktiva.taxes).toBe("function");
   });
@@ -29,12 +32,12 @@ describe("aktiva", () => {
 
 afterAll(async () => {
   // Clear all invoices after all tets have run
-  const salesInvoices = await aktiva.salesInvoices({
+  const salesInvoices = await aktiva.salesInvoices.salesInvoicesList({
     PeriodStart: new Date("2024-01-01T00:00:00"),
     PeriodEnd: new Date("2024-06-01T00:00:00"),
   });
   if (!salesInvoices) throw Error("No salesInvoices to clean up");
   for (const invoice of salesInvoices) {
-    await aktiva.deleteSalesInvoice({ Id: invoice.SIHId });
+    await aktiva.salesInvoices.deleteSalesInvoice({ Id: invoice.SIHId });
   }
 }, 30000);

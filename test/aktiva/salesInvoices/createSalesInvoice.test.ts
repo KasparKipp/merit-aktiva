@@ -1,13 +1,6 @@
 import { describe, it, expect } from "vitest";
-import getSignPayload from "@/aktiva/authentication/getSignPayload";
-
-import getCreateSalesInvoice, {
-  CreateSalesInvoiceParams,
-  MinimalItemObject,
-} from "@/aktiva/createSalesInvoice/getCreateSalesInvoice";
-import { ItemObjectTypes } from "@/aktiva/consts";
+import merit, { type MeritConfig, CreateSalesInvoiceParams, ItemObjectTypes, MinimalItemObject,  } from "@/index";
 import { isUuid } from "@/aktiva/testutils";
-import { MeritConfig } from "@/types";
 
 const createSalesInvoiceTestConfig = {
   apiId: process.env.TEST_MERIT_API_ID as MeritConfig["apiId"],
@@ -15,8 +8,9 @@ const createSalesInvoiceTestConfig = {
   localization: "EE",
 } as const;
 
-const signPayload = getSignPayload(createSalesInvoiceTestConfig);
-const createSalesInvoice = getCreateSalesInvoice(createSalesInvoiceTestConfig, signPayload);
+
+const aktiva = merit(createSalesInvoiceTestConfig);
+const { createSalesInvoice } = aktiva.salesInvoices;
 
 describe("createSalesInvoice", () => {
   it("Should create an invoice with minimal info", async () => {
